@@ -7,7 +7,7 @@
         data-automation-id="nav-drawer-toggle"
         aria-label="Open navigation drawer"
       />
-      <v-app-bar-title>{{service.name | capitalize}}</v-app-bar-title>
+      <v-app-bar-title>Profile</v-app-bar-title>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -16,49 +16,65 @@
       temporary
     >
       <v-list density="compact" nav>
-        {% for item in service.data_domains.controls %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>PROFILE DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/profiles"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Profiles"
+          data-automation-id="nav-profiles-list-link"
         />
         <v-list-item
-          to="/{{ item | lower }}s/new"
+          to="/profiles/new"
           prepend-icon="mdi-plus"
-          title="New {{ item }}"
-          data-automation-id="nav-{{ item | lower }}s-new-link"
+          title="New Profile"
+          data-automation-id="nav-profiles-new-link"
         />
 
         <v-divider class="my-2" />
-        {% endfor %}
-        {% for item in service.data_domains.creates %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>PLATFORM DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/platforms"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Platforms"
+          data-automation-id="nav-platforms-list-link"
         />
         <v-list-item
-          to="/{{ item | lower }}s/new"
+          to="/platforms/new"
           prepend-icon="mdi-plus"
-          title="New {{ item }}"
-          data-automation-id="nav-{{ item | lower }}s-new-link"
+          title="New Platform"
+          data-automation-id="nav-platforms-new-link"
         />
 
         <v-divider class="my-2" />
-        {% endfor %}
-        {% for item in service.data_domains.consumes %}
-        <v-list-subheader>{{ item | upper }} DOMAIN</v-list-subheader>
+        
+        <v-list-subheader>USER DOMAIN</v-list-subheader>
         <v-list-item
-          to="/{{ item | lower }}s"
+          to="/users"
           prepend-icon="mdi-view-list"
-          title="List {{ item }}s"
-          data-automation-id="nav-{{ item | lower }}s-list-link"
+          title="List Users"
+          data-automation-id="nav-users-list-link"
         />
-        {% endfor %}
+        <v-list-item
+          to="/users/new"
+          prepend-icon="mdi-plus"
+          title="New User"
+          data-automation-id="nav-users-new-link"
+        />
+
+        <v-divider class="my-2" />
+        
+        
+        
+        <v-list-subheader>IDENTITY DOMAIN</v-list-subheader>
+        <v-list-item
+          to="/identitys"
+          prepend-icon="mdi-view-list"
+          title="List Identitys"
+          data-automation-id="nav-identitys-list-link"
+        />
+        
       </v-list>
 
       <template v-slot:append>

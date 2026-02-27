@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/{{ service.data_domains.controls[0] | lower }}s'
+      redirect: '/profiles'
     },
     {
       path: '/login',
@@ -14,63 +14,83 @@ const router = createRouter({
       component: () => import('@/pages/LoginPage.vue'),
       meta: { requiresAuth: false }
     },
-    {% for item in service.data_domains.controls %}
-    // Control domain: {{ item }}
+    
+    // Control domain: Profile
     {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
+      path: '/profiles',
+      name: 'Profiles',
+      component: () => import('@/pages/ProfilesListPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/new',
-      name: '{{ item }}New',
-      component: () => import('@/pages/{{ item }}NewPage.vue'),
+      path: '/profiles/new',
+      name: 'ProfileNew',
+      component: () => import('@/pages/ProfileNewPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}Edit',
-      component: () => import('@/pages/{{ item }}EditPage.vue'),
+      path: '/profiles/:id',
+      name: 'ProfileEdit',
+      component: () => import('@/pages/ProfileEditPage.vue'),
       meta: { requiresAuth: true }
     },
-    {% endfor %}
-    {% for item in service.data_domains.creates %}
-    // Create domain: {{ item }}
+    
+    // Control domain: Platform
     {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/{{ item | lower }}s/new',
-      name: '{{ item }}New',
-      component: () => import('@/pages/{{ item }}NewPage.vue'),
+      path: '/platforms',
+      name: 'Platforms',
+      component: () => import('@/pages/PlatformsListPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}View',
-      component: () => import('@/pages/{{ item }}ViewPage.vue'),
-      meta: { requiresAuth: true }
-    },
-    {% endfor %}
-    {% for item in service.data_domains.consumes %}
-    // Consume domain: {{ item }}
-    {
-      path: '/{{ item | lower }}s',
-      name: '{{ item }}s',
-      component: () => import('@/pages/{{ item }}sListPage.vue'),
+      path: '/platforms/new',
+      name: 'PlatformNew',
+      component: () => import('@/pages/PlatformNewPage.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/{{ item | lower }}s/:id',
-      name: '{{ item }}View',
-      component: () => import('@/pages/{{ item }}ViewPage.vue'),
+      path: '/platforms/:id',
+      name: 'PlatformEdit',
+      component: () => import('@/pages/PlatformEditPage.vue'),
       meta: { requiresAuth: true }
     },
-    {% endfor %}
+    
+    // Control domain: User
+    {
+      path: '/users',
+      name: 'Users',
+      component: () => import('@/pages/UsersListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/users/new',
+      name: 'UserNew',
+      component: () => import('@/pages/UserNewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/users/:id',
+      name: 'UserEdit',
+      component: () => import('@/pages/UserEditPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
+    
+    
+    // Consume domain: Identity
+    {
+      path: '/identitys',
+      name: 'Identitys',
+      component: () => import('@/pages/IdentitysListPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/identitys/:id',
+      name: 'IdentityView',
+      component: () => import('@/pages/IdentityViewPage.vue'),
+      meta: { requiresAuth: true }
+    },
+    
     // Admin route
     {
       path: '/admin',
@@ -94,7 +114,7 @@ router.beforeEach((to, _from, next) => {
   const requiredRole = to.meta.requiresRole as string | undefined
   if (requiredRole && !hasStoredRole(requiredRole)) {
     // Redirect to default page if user doesn't have required role
-    next({ name: '{{ service.data_domains.controls[0] }}s' })
+    next({ name: 'Profiles' })
     return
   }
   
@@ -102,7 +122,7 @@ router.beforeEach((to, _from, next) => {
 })
 
 router.afterEach((to) => {
-  document.title = to.path === '/login' ? '{{info.name}} Login' : '{{service.name | capitalize}}'
+  document.title = to.path === '/login' ? 'Creators Dashboard Login' : 'Profile'
 })
 
 export default router
